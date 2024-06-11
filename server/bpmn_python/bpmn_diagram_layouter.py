@@ -371,7 +371,7 @@ def place_element_in_grid(node_with_classification, grid, last_row, last_col, fl
     outgoing_flows = node_with_classification[node_param_name][1][consts.Consts.outgoing_flow]
 
     if node_with_classification[node_param_name][1]["node_name"] == "Task3":
-        print("dfgrg")
+        print(float("dfgrg"))
 
     if len(incoming_flows) == 0:
         # if node has no incoming flow, put it in new row
@@ -585,9 +585,9 @@ def set_coordinates_for_nodes(bpmn_graph, grid):
             cell = next(
                 grid_cell for grid_cell in grid if grid_cell.node_id == node[0])
             node[1][consts.Consts.x] = str(
-                cell.col * 150 + (100 - int(node[1][consts.Consts.width]))//2)
+                cell.col * 150 + (100 - int(float(node[1][consts.Consts.width])))//2)
             node[1][consts.Consts.y] = str(
-                cell.row * 150 + (100 - int(node[1][consts.Consts.height]))//2)
+                cell.row * 150 + (100 - int(float(node[1][consts.Consts.height])))//2)
         except:  # boundary events
             pass
     boundary_events = bpmn_graph.get_nodes(consts.Consts.boundary_event)
@@ -600,25 +600,25 @@ def set_coordinates_for_nodes(bpmn_graph, grid):
         successor = next(tmp_node for tmp_node in nodes
                          if tmp_node[0] == successor_id)
 
-        successor_y_center = int(
-            successor[1][consts.Consts.y]) + int(successor[1][consts.Consts.height])//2
-        att_y_center = int(
-            attached_to[1][consts.Consts.y]) + int(attached_to[1][consts.Consts.height])//2
+        successor_y_center = int(float(
+            successor[1][consts.Consts.y]) + int(float(successor[1][consts.Consts.height])))//2
+        att_y_center = int(float(
+            attached_to[1][consts.Consts.y]) + int(float(attached_to[1][consts.Consts.height])))//2
         if att_y_center < successor_y_center:
             boundary[1][consts.Consts.x] = str(
-                int(attached_to[1][consts.Consts.x]) + 30)
+                int(float(attached_to[1][consts.Consts.x]) + 30))
             boundary[1][consts.Consts.y] = str(
-                int(attached_to[1][consts.Consts.y]) + 80)
+                int(float(attached_to[1][consts.Consts.y]) + 80))
         elif att_y_center == successor_y_center:
             boundary[1][consts.Consts.x] = str(
-                int(attached_to[1][consts.Consts.x]) + 80)
+                int(float(attached_to[1][consts.Consts.x]) + 80))
             boundary[1][consts.Consts.y] = str(
-                int(attached_to[1][consts.Consts.y]) + 30)
+                int(float(attached_to[1][consts.Consts.y]) + 30))
         else:
             boundary[1][consts.Consts.x] = str(
-                int(attached_to[1][consts.Consts.x]) + 30)
+                int(float(attached_to[1][consts.Consts.x]) + 30))
             boundary[1][consts.Consts.y] = str(
-                int(attached_to[1][consts.Consts.y]) - 20)
+                int(float(attached_to[1][consts.Consts.y]) - 20))
 
 
 def set_flows_waypoints(bpmn_graph, back_edges_ids, reversed_nodes):
@@ -664,15 +664,15 @@ def set_flows_waypoints(bpmn_graph, back_edges_ids, reversed_nodes):
                     attached_to[1][consts.Consts.outgoing_flow])
             target_node = bpmn_graph.get_node_by_id(
                 flow[2][consts.Consts.target_ref])
-        source_width = int(source_node[1][consts.Consts.width])
-        source_height = int(source_node[1][consts.Consts.height])
-        source_x = int(source_node[1][consts.Consts.x])
-        source_y = int(source_node[1][consts.Consts.y])
-
-        target_width = int(target_node[1][consts.Consts.width])
-        target_height = int(target_node[1][consts.Consts.height])
-        target_x = int(target_node[1][consts.Consts.x])
-        target_y = int(target_node[1][consts.Consts.y])
+        source_width = int(float(source_node[1][consts.Consts.width]))
+        source_height = int(float((source_node[1][consts.Consts.height])))
+        source_x = int(float((source_node[1][consts.Consts.x])))
+        source_y = int(float((source_node[1][consts.Consts.y])))
+        
+        target_width = int(float((target_node[1][consts.Consts.width])))
+        target_height = int(float((target_node[1][consts.Consts.height])))
+        target_x = int(float((target_node[1][consts.Consts.x])))
+        target_y = int(float((target_node[1][consts.Consts.y])))
 
         if consts.Consts.branch_offset in flow[2]:
             if reversed:
